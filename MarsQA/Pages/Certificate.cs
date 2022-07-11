@@ -71,6 +71,7 @@ namespace MarsQA.Pages
             WaitHelpers.WaitToBeClickable(driver, "Xpath", "//div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody/tr/td[1]",5);
             IWebElement newcerti = driver.FindElement(By.XPath("//div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody/tr/td[1]"));
             return newcerti.Text;
+
            
         }
         public void deletecertificate(IWebDriver driver,String certificate)
