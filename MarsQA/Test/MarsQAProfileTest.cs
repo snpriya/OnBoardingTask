@@ -21,13 +21,13 @@ namespace MarsQA.Test
         {
             //create object for certificate
             Certificate certificateobj = new Certificate();
-            certificateobj.addCertificate(driver);
-            certificateobj.checkAddCeritificate(driver);
+            certificateobj.addCertificate(driver,"dummy1","dummy2","dummy3");
+            certificateobj.checkCeritificate(driver);
         }
         public void editCertificate()
         {
             Certificate certificateobj = new Certificate();
-            certificateobj.updatecertificate(driver,"dummy");
+            //certificateobj.updatecertificate(driver,"dummy","dummy1","dummy2");
         }
         public void deletecertificate()
         {
@@ -40,25 +40,25 @@ namespace MarsQA.Test
         {
             //creating object for education class
             Education educationobj = new Education();
-            educationobj.AddEducation(driver);
+            educationobj.AddEducation(driver,"dummy","dummy1","dummy2","dummy3","dummy4");
             //educationobj.CheckAddEducation(driver);
         }
         public void  editeducation()
         {
             Education educationobj = new Education();
-            educationobj.UpdateEducation(driver, "dummy");
+            educationobj.UpdateEducation(driver, "dummy","dummy1","dummy2","dummy3","dummy4");
 
         }
         public void deleteeducation()
         {
             Education educationobj = new Education();
-            educationobj.DeleteEducation(driver);
+            educationobj.DeleteEducation(driver,"dummy");
         }
         //[Test, Order(3), Description("Create Language")]
         public void addlanguage()
         {
             Language languageobj = new Language();
-            languageobj.addLanguage(driver);
+            languageobj.addLanguage(driver,"dummy","dummy1");
             languageobj.checkaddlanguage(driver);
         }
        public void editlanguage()
@@ -69,7 +69,7 @@ namespace MarsQA.Test
         public void deletelanguage()
         {
             Language languageobj = new Language();
-            languageobj.DeleteLanguage(driver);
+            languageobj.DeleteLanguage(driver,"dummy");
         }
 
 
