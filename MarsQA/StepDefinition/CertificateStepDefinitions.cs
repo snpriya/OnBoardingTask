@@ -1,6 +1,8 @@
 using MarsQA.Pages;
+using MarsQA.Pages.Profile;
 using MarsQA.Utilities;
 using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
 using TechTalk.SpecFlow;
@@ -8,29 +10,37 @@ using TechTalk.SpecFlow;
 namespace MarsQA.StepDefinition
 {
     [Binding]
+    [TestFixture]
     public class CertificateStepDefinitions:CommonDriver
     {
         [After]
-        public void Dispose()
+        public void dispose()
         {
-
             if(driver!=null)
             {
-                driver.Dispose();
+                driver.Close();
             }
         }
+        Certificate certificateobj;
+        LoginPage loginpageobj;
+
+        public CertificateStepDefinitions()
+        {
+            certificateobj = new Certificate(driver);
+        }
+       
         [Given(@"I logged up and go to certification page")]
         public void GivenILoggedUpAndGoToCertificationPage()
         {
             driver = new ChromeDriver();
-            LoginPage loginpageobj = new LoginPage();
+            loginpageobj = new LoginPage(driver);
             loginpageobj.LoginSteps(driver);
-            Certificate certificateobj = new Certificate();
+             certificateobj = new Certificate(driver);
         }
         [When(@"I create a new Certifications using '([^']*)' '([^']*)' '([^']*)'")]
         public void WhenICreateANewCertificationsUsing(string p0, string p1, string p2)
         {
-            Certificate certificateobj = new Certificate();
+             certificateobj = new Certificate(driver);
             certificateobj.addCertificate(driver, p0, p1, p2);
 
         }
@@ -38,7 +48,7 @@ namespace MarsQA.StepDefinition
         [Then(@"The new certificate record added sucessfully'([^']*)' '([^']*)' '([^']*)'")]
         public void ThenTheNewCertificateRecordAddedSucessfully(string p0, string p1, string p2)
         {
-            Certificate certificateobj = new Certificate();
+             certificateobj = new Certificate(driver);
             String certi = certificateobj.checkCeritificate(driver);
             String certifrom = certificateobj.checkcertificatefrom(driver);
             String certiyear = certificateobj.checkcertificateyear(driver);
@@ -49,14 +59,14 @@ namespace MarsQA.StepDefinition
         [When(@"I update '([^']*)' '([^']*)' '([^']*)' on an existing certificate record")]
         public void WhenIUpdateOnAnExistingCertificateRecord(string ecertificate, string efrom, string eyear)
         {
-            Certificate certificateobj = new Certificate();
+             certificateobj = new Certificate(driver);
             certificateobj.updatecertificate(driver, ecertificate, efrom,eyear);
         }
 
         [Then(@"The record will be updated using '([^']*)' '([^']*)' '([^']*)'")]
         public void ThenTheRecordWillBeUpdatedUsing(string ecertificate, string efrom, string eyear)
         {
-            Certificate certificateobj = new Certificate();
+             certificateobj = new Certificate(driver);
             String cert = certificateobj.checkCeritificate(driver);
             String certifrom = certificateobj.checkcertificatefrom(driver);
             Assert.That(cert == ecertificate, "certificate is not updated");
@@ -69,7 +79,7 @@ namespace MarsQA.StepDefinition
             //driver = new ChromeDriver();
             //LoginPage loginpageobj = new LoginPage();
             //loginpageobj.LoginSteps(driver);
-            Certificate certificateobj = new Certificate();
+             certificateobj = new Certificate(driver);
             certificateobj.deletecertificate(driver, certificate);
         }
 
@@ -77,7 +87,7 @@ namespace MarsQA.StepDefinition
         [Then(@"The existing certification deleted Successfully '([^']*)'")]
         public void ThenTheExistingCertificationDeletedSuccessfully(string certificate)
         {
-            Certificate certificateobj = new Certificate();
+             certificateobj = new Certificate(driver);
             String delcerti = certificateobj.delcertificate(driver);
             Assert.That(delcerti != certificate, "not deleted");
         }

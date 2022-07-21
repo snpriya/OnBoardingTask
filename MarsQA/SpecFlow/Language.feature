@@ -25,3 +25,6 @@ Scenario Outline:2 Edit the Language with valid credentials
  Given I logged up and go to Language page
   When I deleted the existing records using '<language>'
  Then The language deleted Successfully using '<language>'
+Examples: 
+| language  |
+| malayalam |

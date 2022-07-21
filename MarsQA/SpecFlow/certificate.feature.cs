@@ -117,7 +117,7 @@ namespace MarsQA.SpecFlow
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("2 Edit the certification with valid credentials")]
         [NUnit.Framework.CategoryAttribute("Edit")]
-        [NUnit.Framework.TestCaseAttribute("c++", "ISTQB", "2007", null)]
+        [NUnit.Framework.TestCaseAttribute("Tester", "ISTQB", "2007", null)]
         public void _2EditTheCertificationWithValidCredentials(string certificate, string from, string year, string[] exampleTags)
         {
             string[] @__tags = new string[] {
@@ -158,7 +158,7 @@ this.ScenarioInitialize(scenarioInfo);
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("3 Delete the certification")]
         [NUnit.Framework.CategoryAttribute("Delete")]
-        [NUnit.Framework.TestCaseAttribute("Developer", null)]
+        [NUnit.Framework.TestCaseAttribute("Tester", null)]
         public void _3DeleteTheCertification(string certificate, string[] exampleTags)
         {
             string[] @__tags = new string[] {

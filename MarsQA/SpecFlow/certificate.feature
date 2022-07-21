@@ -17,14 +17,14 @@ Scenario Outline:2 Edit the certification with valid credentials
     Then The record will be updated using '<certificate>' '<from>' '<year>'
     Examples:     
     | certificate | from  | year |
-    | c++         | ISTQB | 2007 |
+    | Tester       | ISTQB | 2007 |
     
  @Delete
  Scenario Outline:3 Delete the certification
     Given  I logged up and go to certification page
     When  I delete existing record using '<certificate>'
     Then  The existing certification deleted Successfully '<certificate>'
-
     Examples: 
     | certificate |
-    | Developer   |
+    | Tester      |
+   

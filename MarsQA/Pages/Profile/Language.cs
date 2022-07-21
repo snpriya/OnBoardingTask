@@ -8,11 +8,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MarsQA.Pages
+namespace MarsQA.Pages.Profile
 {
-    public class Language:CommonDriver
+    public class Language
     {
-        public void addLanguage(IWebDriver driver,String language,String languagelevel)
+        public IWebDriver driver;
+        Language languageobj;
+        public Language(IWebDriver _driver)
+        {
+            this.driver = _driver;
+        }
+        public void addLanguage(IWebDriver driver, string language, string languagelevel)
         {
             WaitHelpers.WaitToBeClickable(driver, "XPath", "//div/section[2]/div/div/div/div[3]/form/div[1]/a[1]", 6);
             //click language tab
@@ -22,29 +28,29 @@ namespace MarsQA.Pages
             //add lanuage
             driver.FindElement(By.XPath("//div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/div/div[1]/input")).SendKeys(language);
             //select level
-            var lanlevel = (driver.FindElement(By.Name("level")));
+            var lanlevel = driver.FindElement(By.Name("level"));
             var selectElement = new SelectElement(lanlevel);
             selectElement.SelectByValue(languagelevel);
             WaitHelpers.WaitToBeClickable(driver, "Xpath", "//div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/div/div[3]/input[1]", 5);
             //click add button
             driver.FindElement(By.XPath("//div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/div/div[3]/input[1]")).Click();
         }
-        public String checkaddlanguage(IWebDriver driver)
+        public string checkaddlanguage(IWebDriver driver)
         {
             WaitHelpers.WaitToBeClickable(driver, "XPath", "//div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[1]", 6);
             //check the added language
             IWebElement lan = driver.FindElement(By.XPath("//div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
             return lan.Text;
         }
-        public String checkaddlanguagelevel(IWebDriver driver)
-            {
+        public string checkaddlanguagelevel(IWebDriver driver)
+        {
             WaitHelpers.WaitToBeClickable(driver, "Xpath", "//div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[2]", 3);
             IWebElement level = driver.FindElement(By.XPath("//div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[2]"));
             return level.Text;
 
 
         }
-        public void EditLanguage(IWebDriver driver,String language,String languagelevel)
+        public void EditLanguage(IWebDriver driver, string language, string languagelevel)
         {
             WaitHelpers.WaitToBeClickable(driver, "XPath", "//div/section[2]/div/div/div/div[3]/form/div[1]/a[1]", 6);
             //click language tab
@@ -56,8 +62,8 @@ namespace MarsQA.Pages
 
             driver.FindElement(By.XPath("//div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody/tr/td/div/div[1]/input")).Clear();
             WaitHelpers.WaitToBeClickable(driver, "Xpath", "//div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody/tr/td/div/div[1]/input", 2);
-            driver.FindElement(By.XPath("//div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody/tr/td/div/div[1]/input")).SendKeys(language) ;
-            var lanlevel = (driver.FindElement(By.Name("level")));
+            driver.FindElement(By.XPath("//div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody/tr/td/div/div[1]/input")).SendKeys(language);
+            var lanlevel = driver.FindElement(By.Name("level"));
             var selectElement = new SelectElement(lanlevel);
             selectElement.SelectByValue(languagelevel);
             WaitHelpers.WaitToBeClickable(driver, "Xpath", "//div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody/tr/td/div/span/input[1]", 2);
@@ -65,22 +71,22 @@ namespace MarsQA.Pages
             driver.FindElement(By.XPath("//div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody/tr/td/div/span/input[1]")).Click();
             Thread.Sleep(1000);
         }
-        public String checkeditlanguage(IWebDriver driver)
+        public string checkeditlanguage(IWebDriver driver)
         {
             WaitHelpers.WaitToBeClickable(driver, "XPath", "//div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[1]", 6);
-            IWebElement elan=driver.FindElement(By.XPath("//div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
+            IWebElement elan = driver.FindElement(By.XPath("//div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
             return elan.Text;
-            
+
         }
-       
-        public String checkeditlanguagelevel(IWebDriver driver)
+
+        public string checkeditlanguagelevel(IWebDriver driver)
         {
             WaitHelpers.WaitToBeClickable(driver, "Xpath", "//div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[2]", 3);
             Thread.Sleep(2000);
             IWebElement editlevel = driver.FindElement(By.XPath("//div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[2]"));
             return editlevel.Text;
         }
-        public void DeleteLanguage(IWebDriver driver,String language)
+        public void DeleteLanguage(IWebDriver driver, string language)
         {
             try
             {
@@ -89,13 +95,13 @@ namespace MarsQA.Pages
                 Thread.Sleep(2000);
                 driver.FindElement(By.XPath("//div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[3]/span[2]/i")).Click();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Assert.Fail("not deleted successfully");
 
             }
         }
-        
-        
+
+
     }
 }

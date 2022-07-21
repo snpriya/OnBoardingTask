@@ -1,4 +1,5 @@
 using MarsQA.Pages;
+using MarsQA.Pages.Profile;
 using MarsQA.Utilities;
 using NUnit.Framework;
 using OpenQA.Selenium.Chrome;
@@ -8,30 +9,37 @@ using TechTalk.SpecFlow;
 namespace MarsQA.StepDefinition
 {
     [Binding]
+    [TestFixture]
     public class EducationStepDefinitions:CommonDriver
     {
         [After]
-        public void Dispose()
+        public void dispose()
         {
-
             if (driver != null)
             {
-                driver.Dispose();
+                driver.Close();
             }
+        }
+        Education educationobj;
+        LoginPage loginpageobj;
+        public EducationStepDefinitions()
+        {
+            educationobj = new Education(driver);
+            loginpageobj = new LoginPage(driver);
         }
         [Given(@"I logged up and go to education page")]
         public void GivenILoggedUpAndGoToEducationPage()
         {
             driver = new ChromeDriver();
-            LoginPage loginpageobj = new LoginPage();
+             loginpageobj = new LoginPage(driver);
             loginpageobj.LoginSteps(driver);
-            Education educationobj = new Education();
+             educationobj = new Education(driver);
             
         }
         [When(@"I create a new education record '([^']*)' '([^']*)' '([^']*)' '([^']*)' '([^']*)'")]
         public void WhenICreateANewEducationRecord(string country, string university, string coursetitle, string degree, string year)
         {
-            Education educationobj = new Education();
+             educationobj = new Education(driver);
             educationobj.AddEducation(driver, country, university, coursetitle, degree, year);
 
         }
@@ -39,7 +47,7 @@ namespace MarsQA.StepDefinition
         [Then(@"The  new record  is created sucessfully '([^']*)' '([^']*)' '([^']*)' '([^']*)' '([^']*)'")]
         public void ThenTheNewRecordIsCreatedSucessfully(string country, string university, string coursetitle, string degree, string year)
         {
-            Education educationobj = new Education();
+            Education educationobj = new Education(driver);
             String addcountry = educationobj.checkcountry(driver);
             String adduniversity = educationobj.checkuniversity(driver);
             String addcourse = educationobj.checktitlecourse(driver);
@@ -54,7 +62,7 @@ namespace MarsQA.StepDefinition
         [When(@"I update '([^']*)' '([^']*)' '([^']*)' '([^']*)' '([^']*)' in existing education record")]
         public void WhenIUpdateInExistingEducationRecord(string country, string university, string coursetitle, string degree, string year)
         {
-            Education educationobj = new Education();
+             educationobj = new Education(driver);
             educationobj.UpdateEducation(driver, country, university, coursetitle, degree, year);
             
         }
@@ -62,7 +70,7 @@ namespace MarsQA.StepDefinition
         [Then(@"The record is updated successfully '([^']*)' '([^']*)' '([^']*)' '([^']*)' '([^']*)'")]
         public void ThenTheRecordIsUpdatedSuccessfully(string p1, string university, string coursetitle, string p4, string p5)
         {
-            Education educationobj = new Education();
+             educationobj = new Education(driver);
             String editcountry = educationobj.checkeditcountry(driver);
             String editdegree = educationobj.checkeditdegree(driver);
             String edityear = educationobj.checkedityear(driver);
@@ -77,13 +85,13 @@ namespace MarsQA.StepDefinition
         [When(@"I deleted the existing records using'([^']*)' \.")]
         public void WhenIDeletedTheExistingRecordsUsing_(string degree)
         {
-            Education educationobj = new Education();
+             educationobj = new Education(driver);
             educationobj.DeleteEducation(driver, degree);
         }
         [Then(@"The education is deleted Successfully'([^']*)'")]
         public void ThenTheEducationIsDeletedSuccessfully(string degree)
         {
-            Education educationobj = new Education();
+             educationobj = new Education(driver);
             
             String deldegree=educationobj.checkdegree(driver);
             Assert.That(deldegree != degree, "not deleted");

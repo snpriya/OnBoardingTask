@@ -13,7 +13,14 @@ namespace MarsQA.Pages
 {
     public class LoginPage
     {
-            
+        public IWebDriver driver;
+        LoginPage LoginPageObj;
+        public LoginPage(IWebDriver driver)
+        {
+            //initial driver object
+            this.driver = driver;
+        }
+
         public void LoginSteps(IWebDriver driver)
         {
             driver.Manage().Window.Maximize();

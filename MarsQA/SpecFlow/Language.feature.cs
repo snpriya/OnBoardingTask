@@ -156,11 +156,18 @@ this.ScenarioInitialize(scenarioInfo);
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("3 Delete the Language")]
         [NUnit.Framework.CategoryAttribute("DeleteLanguage")]
-        public void _3DeleteTheLanguage()
+        [NUnit.Framework.TestCaseAttribute("malayalam", null)]
+        public void _3DeleteTheLanguage(string language, string[] exampleTags)
         {
-            string[] tagsOfScenario = new string[] {
+            string[] @__tags = new string[] {
                     "DeleteLanguage"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("language", language);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("3 Delete the Language", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 24
  this.ScenarioInitialize(scenarioInfo);
@@ -176,10 +183,10 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("I logged up and go to Language page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 26
-  testRunner.When("I deleted the existing records using \'<language>\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+  testRunner.When(string.Format("I deleted the existing records using \'{0}\'", language), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 27
- testRunner.Then("The language deleted Successfully using \'<language>\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then(string.Format("The language deleted Successfully using \'{0}\'", language), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

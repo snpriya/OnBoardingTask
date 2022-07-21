@@ -11,18 +11,25 @@ using MarsQA.Pages;
 namespace MarsQA.Utilities
 {
     [TestFixture]
+   
     public class CommonDriver
     {
-        public IWebDriver driver;
-
-        LoginPage loginpageobj = new LoginPage();
+        public  IWebDriver driver;
+       
+        LoginPage loginpageobj;
+        
+        public CommonDriver()
+        {
+            loginpageobj = new LoginPage(driver);
+        }
         [OneTimeSetUp]
+       /* 
         public void LoginActions()
         {
             driver = new ChromeDriver();
             
             loginpageobj.LoginSteps(driver);
-        }
+        }*/
         [OneTimeTearDown]
         public void CloseTestRun()
         {
